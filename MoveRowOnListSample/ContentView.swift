@@ -9,8 +9,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var appleDevices = ["iPhone", "iPad", "iMac", "Macbook"]
+    
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            List {
+                ForEach(appleDevices, id: \.self) { device in
+                    Text(device)
+                }
+                .onMove { (indexSet, index) in
+                    self.appleDevices.move(fromOffsets: indexSet, toOffset: index)
+                }
+                .navigationBarTitle(Text("Apple Devices"))
+            }
+            .navigationBarItems(trailing: EditButton())
+        }
     }
 }
 
